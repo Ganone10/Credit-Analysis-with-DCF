@@ -16,6 +16,7 @@ if button_credit:
     # Create the Ticker object
     #company = yf.Ticker(ticker_credit)
     financials, balance_sheet, cashflow, info = ci.fetch_financials(ticker_credit)
+    financials_calc = ci.analyze_financials(ticker_credit)
     # Retrieve the company information
 
     if info is not None:
@@ -39,6 +40,16 @@ if button_credit:
         # Display Financial Statements
         st.write("### Income Statement:")
         st.dataframe(financials)
+        print(financials_calc)
+        st.write(f"""
+        **Financial Performance Analysis**  
+
+        The company achieved **total sales of ${current_sales} billion** this year, reflecting a **{sales_growth}% YoY increase** compared to ${previous_sales} billion last year.  
+        Gross profit grew to **${current_gross_profit} billion**, representing a **YoY growth of {gross_profit_growth}%**, with the gross profit margin improving from **{previous_margin}%** to **{current_margin}%**, demonstrating better efficiency.  
+        EBITDA rose significantly from **${previous_ebitda} billion** to **${current_ebitda} billion**, showing a **YoY increase of {ebitda_growth}%**, underscoring strong operational gains.  
+
+        This performance underlines the company's enhanced profitability and solid financial stability.
+        """)
 
         st.write("### Balance Sheet:")
         st.dataframe(balance_sheet)
